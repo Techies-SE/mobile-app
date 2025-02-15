@@ -3,10 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/constants.dart';
 
 class Boarding3 extends StatelessWidget {
-  //final Function() onPressed;
   const Boarding3({
     super.key,
-    //required this.onPressed,
   });
 
   @override
@@ -22,8 +20,8 @@ class Boarding3 extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(
-              height: 400,
+            Spacer(
+              flex: 2,
             ),
             Align(
               alignment: AlignmentDirectional.center,
@@ -53,8 +51,8 @@ class Boarding3 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 180,
+            Spacer(
+              flex: 1,
             ),
           ],
         )

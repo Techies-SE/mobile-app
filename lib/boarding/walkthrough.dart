@@ -61,8 +61,8 @@ class _WalkthroughState extends State<Walkthrough> {
                   ? TextButton(
                       onPressed: () {
                         _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
                         );
                       },
                       style: TextButton.styleFrom(
