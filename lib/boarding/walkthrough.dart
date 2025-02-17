@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient_app/auth/login_screen.dart';
 import 'package:patient_app/constants.dart';
 import 'boarding1.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -78,7 +79,14 @@ class _WalkthroughState extends State<Walkthrough> {
                       ),
                     )
                   : TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         minimumSize: Size(150, 50),
                         backgroundColor: mainBgColor,

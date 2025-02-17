@@ -37,6 +37,7 @@ dependencies:
   flutter_native_splash: ^2.4.4
   smooth_page_indicator: ^1.2.0+3
   google_fonts: ^6.2.1
+  flutter_otp_text_field: ^1.4.0+2
 
 dev_dependencies:
   flutter_test:
