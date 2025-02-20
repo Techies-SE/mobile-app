@@ -55,7 +55,7 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             Spacer(),
             Text(
-              'Don\' get OTP code?',
+              'Don\'t get OTP code?',
               style: GoogleFonts.poppins(
                 fontSize: 15,
               ),
