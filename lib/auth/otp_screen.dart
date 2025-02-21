@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/constants.dart';
-import 'package:patient_app/main%20screens/homepage.dart';
 import 'package:patient_app/main_screen.dart';
 
 class OtpScreen extends StatefulWidget {

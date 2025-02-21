@@ -83,9 +83,7 @@ class AppointmentCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 50,
-                        ),
+                      
                         Expanded(
                           child: Row(
                             children: [
@@ -110,7 +108,7 @@ class AppointmentCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 16,
+                      height: 10,
                     ),
                     Row(
                       children: [

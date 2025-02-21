@@ -127,9 +127,7 @@ class _HomepageState extends State<Homepage> {
                       service: 'Medical Checkup',
                     ),
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
+                
                   Expanded(
                     child: ServiceCard(
                       image: 'assets/images/emergency.png',
@@ -228,7 +226,7 @@ class ServiceCard extends StatelessWidget {
             Text(
               service,
               style: GoogleFonts.inter(
-                fontSize: 15,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
             )

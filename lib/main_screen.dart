@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/constants.dart';
 import 'package:patient_app/main%20screens/appointment.dart';
 import 'package:patient_app/main%20screens/homepage.dart';
@@ -26,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       bottomNavigationBar: SizedBox(
-        height: 80,
+        height: 100,
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
