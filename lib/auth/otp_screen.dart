@@ -3,7 +3,6 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/auth/change_password.dart';
 import 'package:patient_app/constants.dart';
-import 'package:patient_app/main_screen.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
