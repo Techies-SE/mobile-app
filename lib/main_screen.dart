@@ -13,9 +13,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  int myIndex = 0;
   @override
   Widget build(BuildContext context) {
-
     List<Widget> pages = [
       Homepage(),
       Recommendation(),
@@ -25,10 +25,20 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        iconSize: 20,
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+        selectedItemColor: mainBgColor,
+        unselectedItemColor: Color(0xff929CAD),
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        onTap: (index) {
+          setState(() {
+            myIndex = index;
+          });
+        },
+        currentIndex: myIndex,
         items: [
           BottomNavigationBarItem(
-            backgroundColor: mainBgColor,
             label: 'Home',
             icon: Icon(
               Icons.home,
@@ -47,13 +57,14 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Re',
+            label: 'Profile',
             icon: Icon(
               Icons.person,
             ),
           ),
         ],
       ),
+      body: pages[myIndex],
     );
   }
 }
