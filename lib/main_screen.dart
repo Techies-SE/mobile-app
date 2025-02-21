@@ -25,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         selectedItemColor: mainBgColor,
