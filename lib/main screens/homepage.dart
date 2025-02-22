@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/components/appointmentCard.dart';
 import 'package:patient_app/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:patient_app/notification/notification.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -46,7 +47,14 @@ class _HomepageState extends State<Homepage> {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeNotification(),
+                    ),
+                  );
+                },
                 icon: Icon(
                   CupertinoIcons.bell,
                   color: mainBgColor,
@@ -127,7 +135,6 @@ class _HomepageState extends State<Homepage> {
                       service: 'Medical Checkup',
                     ),
                   ),
-                
                   Expanded(
                     child: ServiceCard(
                       image: 'assets/images/emergency.png',

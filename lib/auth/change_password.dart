@@ -156,8 +156,8 @@ class ChangePassword extends StatelessWidget {
               Card(
                 color: searchAndMore,
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 23.0, horizontal: 25),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 23.0, horizontal: 25),
                   child: SizedBox(
                     width: double.infinity,
                     child: Column(
