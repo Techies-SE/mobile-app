@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient_app/booking_tabs/upcoming.dart';
 import 'package:patient_app/components/category_card.dart';
 import 'package:patient_app/constants.dart';
 
@@ -19,13 +20,16 @@ class Appointment extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 20,
-        ),
-        child: SingleChildScrollView(
+      body: DefaultTabController(
+        length: 3,
+        initialIndex: 0,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: 20,
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,8 +104,42 @@ class Appointment extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
+              Text(
+                'My Bookings',
+                style: GoogleFonts.inter(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              TabBar(
+                indicatorColor: mainBgColor,
+                labelColor: Colors.black,
+                labelStyle: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.bold,),
+                unselectedLabelColor: textColorSecondary,
+                tabs: [
+                  Tab(
+                    text: 'Upcoming',
+                  ),
+                  Tab(
+                    text: 'Completed',
+                  ),
+                  Tab(
+                    text: 'Cancelled',
+                  ),
+                ],
+              ),
+              Expanded(
+                child: TabBarView(children: [
+                  Upcoming(),
+                  Upcoming(),
+                  Upcoming(),
+                ],),
+              )
             ],
           ),
         ),
