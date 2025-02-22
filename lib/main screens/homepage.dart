@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient_app/components/appointmentCard.dart';
+import 'package:patient_app/components/appointment_card.dart';
 import 'package:patient_app/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:patient_app/notification/notification.dart';

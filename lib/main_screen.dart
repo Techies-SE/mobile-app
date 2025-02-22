@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               label: 'Appointment',
               icon: Icon(
-                Icons.edit_calendar_rounded,
+                Icons.calendar_today_outlined,
               ),
             ),
             BottomNavigationBarItem(
