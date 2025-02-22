@@ -14,29 +14,34 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Card(
-          elevation: 5,
-          color: color,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-            child: Image.asset(
-              'assets/images/$image',
-              width: 28,
-              height: 34,
+    return SizedBox(
+      width: 80,
+      child: Column(
+        children: [
+          Card(
+            elevation: 5,
+            color: color,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
+              child: Image.asset(
+                'assets/images/$image',
+                width: 28,
+                height: 35,
+              ),
             ),
           ),
-        ),
-        Text(
-          categoryName,
-          style: GoogleFonts.inter(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: Color(0xff4B5563),
+          Text(
+            categoryName,
+            style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff4B5563),
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
