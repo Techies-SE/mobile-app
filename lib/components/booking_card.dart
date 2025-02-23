@@ -123,6 +123,5 @@ class BookingCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
