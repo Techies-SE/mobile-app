@@ -17,9 +17,10 @@ class MainAppointment extends StatelessWidget {
       length: 3,
       initialIndex: 0,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 20,
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

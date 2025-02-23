@@ -19,9 +19,10 @@ class Recommendation extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 20,
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -226,6 +227,9 @@ class Recommendation extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               ElevatedButton.icon(
                 onPressed: () {},
                 label: Text(
@@ -241,6 +245,7 @@ class Recommendation extends StatelessWidget {
                   size: 22,
                 ),
                 style: ElevatedButton.styleFrom(
+                  minimumSize: Size(double.infinity, 64),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),

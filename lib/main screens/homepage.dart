@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/components/appointment_card.dart';
 import 'package:patient_app/constants.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:patient_app/medical_checkup/medical_checkup.dart';
 import 'package:patient_app/notification/notification.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -28,7 +29,7 @@ class _HomepageState extends State<Homepage> {
             text: ' MFU ',
             style: GoogleFonts.inter(
               color: mainBgColor,
-              fontSize: 17,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
             children: [
@@ -36,7 +37,7 @@ class _HomepageState extends State<Homepage> {
                 text: 'Wellness Center',
                 style: GoogleFonts.inter(
                   color: goldenColor,
-                  fontSize: 17,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -66,9 +67,10 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 20,
+        padding: const EdgeInsets.only(
+          right: 20,
+          left: 20,
+          top: 10.0,
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -130,9 +132,19 @@ class _HomepageState extends State<Homepage> {
               Row(
                 children: [
                   Expanded(
-                    child: ServiceCard(
-                      image: 'assets/images/checkUp.png',
-                      service: 'Medical Checkup',
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MedicalCheckup(),
+                          ),
+                        );
+                      },
+                      child: ServiceCard(
+                        image: 'assets/images/checkUp.png',
+                        service: 'Medical Checkup',
+                      ),
                     ),
                   ),
                   Expanded(

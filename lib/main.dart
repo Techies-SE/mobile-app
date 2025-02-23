@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:patient_app/appointment/appointment_provider.dart';
-import 'boarding/walkthrough.dart';
 import 'package:provider/provider.dart';
+
+import 'boarding/walkthrough.dart';
 
 void main() {
   runApp(const PatientApp());

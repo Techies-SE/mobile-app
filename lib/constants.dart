@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:google_fonts/google_fonts.dart';
 
 const Color mainBgColor = Color(0xff3BA092);
@@ -33,7 +34,7 @@ final List<dynamic> doctors = [
 ];
 
 var appbarTestStyle = GoogleFonts.inter(
-  fontWeight: FontWeight.w500,
-  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  fontSize: 19,
   color: Color(0xff404040),
 );
