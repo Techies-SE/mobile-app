@@ -148,9 +148,12 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   Expanded(
-                    child: ServiceCard(
-                      image: 'assets/images/emergency.png',
-                      service: 'Emergency',
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: ServiceCard(
+                        image: 'assets/images/emergency.png',
+                        service: 'Emergency',
+                      ),
                     ),
                   ),
                 ],
