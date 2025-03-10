@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/components/appointment_card.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/main_screen.dart';
 import 'package:patient_app/medical_checkup/medical_checkup.dart';
 import 'package:patient_app/notification/notification.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -129,6 +130,19 @@ class _HomepageState extends State<Homepage> {
               SizedBox(
                 height: 23,
               ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Quick Actions',
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -149,7 +163,16 @@ class _HomepageState extends State<Homepage> {
                   ),
                   Expanded(
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                myIndex: 2,
+                              ),
+                            ),
+                            (route) => false);
+                      },
                       child: ServiceCard(
                         image: 'assets/images/calendar.png',
                         service: 'Appoitment',
@@ -172,6 +195,7 @@ class _HomepageState extends State<Homepage> {
               ),
               Card(
                 color: Color(0xffF9E3E3),
+                elevation: 3,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10),
@@ -209,12 +233,11 @@ class _HomepageState extends State<Homepage> {
                       ),
                       Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xffE65454),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              )
-                            ),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xffE65454),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            )),
                         onPressed: () {},
                         child: Text(
                           'Call Now',
@@ -265,14 +288,29 @@ class _HomepageState extends State<Homepage> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 20,
-                    horizontal: 15,
+                    horizontal: 20,
                   ),
                   child: Column(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          
+                          Image.asset(
+                            'assets/images/robot.png',
+                            width: 17,
+                            height: 17,
+                            color: mainBgColor,
+                          ),
+                          Text(
+                            'Jan 28,2025',
+                            style: GoogleFonts.poppins(
+                              fontSize: 10,
+                            ),
+                          ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       Text(
                         textAlign: TextAlign.justify,
@@ -311,7 +349,7 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 8,
+      elevation: 3,
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

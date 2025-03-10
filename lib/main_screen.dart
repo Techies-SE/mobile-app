@@ -5,15 +5,18 @@ import 'package:patient_app/main%20screens/homepage.dart';
 import 'package:patient_app/main%20screens/profile.dart';
 import 'package:patient_app/main%20screens/recommendation.dart';
 
+
+// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  int? myIndex = 0;
+   MainScreen({super.key, this.myIndex});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int myIndex = 0;
+  // int myIndex = 0;
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
@@ -36,10 +39,10 @@ class _MainScreenState extends State<MainScreen> {
           unselectedFontSize: 12,
           onTap: (index) {
             setState(() {
-              myIndex = index;
+              widget.myIndex = index;
             });
           },
-          currentIndex: myIndex,
+          currentIndex: widget.myIndex ?? 0,
           items: [
             BottomNavigationBarItem(
               label: 'Home',
@@ -68,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      body: pages[myIndex],
+      body: pages[widget.myIndex ?? 0],
     );
   }
 }

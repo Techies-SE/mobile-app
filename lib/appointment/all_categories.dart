@@ -15,45 +15,32 @@ class AllCategories extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  provider.controller.previousPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeIn,
-                  );
-                },
-                icon: Icon(
-                  CupertinoIcons.back,
+          SizedBox(
+            height: 30,
+          ),
+          SizedBox(
+            width: 260,
+            height: 40,
+            child: TextField(
+              decoration: InputDecoration(
+                enabled: true,
+                filled: true,
+                fillColor: Color(0xffE9E7E2),
+                contentPadding: EdgeInsets.zero,
+                prefixIcon: Icon(
+                  Icons.search,
+                  size: 20,
+                ),
+                hintText: 'Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
                 ),
               ),
-              Spacer(),
-              SizedBox(
-                width: 260,
-                height: 40,
-                child: TextField(
-                  decoration: InputDecoration(
-                    enabled: true,
-                    filled: true,
-                    fillColor: Color(0xffE9E7E2),
-                    contentPadding: EdgeInsets.zero,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 20,
-                    ),
-                    hintText: 'Search',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ),
-              Spacer(
-                flex: 2,
-              ),
-            ],
+            ),
+          ),
+          Spacer(
+            flex: 1,
           ),
           Spacer(),
           Row(

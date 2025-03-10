@@ -37,6 +37,7 @@ class MainAppointment extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    provider.setPageChange(true);
                     provider.controller.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,

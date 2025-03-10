@@ -26,8 +26,8 @@ class CategoryCard extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
               child: Image.asset(
                 'assets/images/$image',
-                width: 28,
-                height: 35,
+                width: 50,
+                height: 50,
               ),
             ),
           ),

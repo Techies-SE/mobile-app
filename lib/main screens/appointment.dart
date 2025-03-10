@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient_app/appointment/all_categories.dart';
 import 'package:patient_app/appointment/appointment_provider.dart';
@@ -19,7 +20,19 @@ class Appointment extends StatelessWidget {
             style: appbarTestStyle,
           ),
           centerTitle: true,
-          automaticallyImplyLeading: false,
+          // automaticallyImplyLeading: provider.pageChange,
+          leading: provider.pageChange
+              ? IconButton(
+                  onPressed: () {
+                    provider.controller.previousPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
+                    provider.setPageChange(false);
+                  },
+                  icon: Icon(CupertinoIcons.back),
+                )
+              : SizedBox(),
           backgroundColor: Colors.white,
         ),
         body: PageView(
