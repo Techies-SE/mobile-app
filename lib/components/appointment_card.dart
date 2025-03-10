@@ -9,7 +9,7 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 3,
       color: Color(0xFF50BEAF).withAlpha(130),
       child: Padding(
         padding: EdgeInsets.all(20),

@@ -37,6 +37,7 @@ class MainAppointment extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    provider.setPageChange(true);
                     provider.controller.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
@@ -62,18 +63,22 @@ class MainAppointment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CategoryCard(
+                  department: 'tooth',
                     image: 'tooth.png',
                     color: Color(0xffDC9497),
                     categoryName: 'Dentistry'),
                 CategoryCard(
+                  department: 'heart',
                     image: 'heart.png',
                     color: Color(0xff93C19E),
                     categoryName: 'Cardiology'),
                 CategoryCard(
+                  department: 'lung',
                     image: 'lung.png',
                     color: Color(0xffF5AD7E),
                     categoryName: 'Pulmonology'),
                 CategoryCard(
+                  department: 'stethoscope',
                     image: 'stethoscope.png',
                     color: Color(0xffACA1CD),
                     categoryName: 'General'),
@@ -86,18 +91,22 @@ class MainAppointment extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CategoryCard(
+                  department: 'brain',
                     image: 'brain.png',
                     color: Color(0xff4D9B91),
                     categoryName: 'Neurology'),
                 CategoryCard(
+                  department: 'stomach',
                     image: 'stomach.png',
                     color: Color(0xff4B5563),
                     categoryName: 'Gastroent...'),
                 CategoryCard(
+                  department: 'lab',
                     image: 'lab.png',
                     color: Color(0xffDEB6B5),
                     categoryName: 'Laboratory'),
                 CategoryCard(
+                  department: 'syringe',
                     image: 'syringe.png',
                     color: Color(0xff89CCDB),
                     categoryName: 'Vaccination'),
