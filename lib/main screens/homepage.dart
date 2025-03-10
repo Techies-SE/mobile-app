@@ -151,12 +151,83 @@ class _HomepageState extends State<Homepage> {
                     child: GestureDetector(
                       onTap: () {},
                       child: ServiceCard(
-                        image: 'assets/images/emergency.png',
-                        service: 'Emergency',
+                        image: 'assets/images/calendar.png',
+                        service: 'Appoitment',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: ServiceCard(
+                        image: 'assets/images/search.png',
+                        service: 'Find Doctor',
                       ),
                     ),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Card(
+                color: Color(0xffF9E3E3),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 10),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/emergency.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Emergency',
+                            style: GoogleFonts.inter(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'Get immediate medical support',
+                            style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xffE65454),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              )
+                            ),
+                        onPressed: () {},
+                        child: Text(
+                          'Call Now',
+                          style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
               ),
               SizedBox(
                 height: 16,
@@ -196,18 +267,27 @@ class _HomepageState extends State<Homepage> {
                     vertical: 20,
                     horizontal: 15,
                   ),
-                  child: Text(
-                    textAlign: TextAlign.justify,
-                    'Lorem ipsum dolor sit amet consectetur. Aliquet'
-                    ' rutrum in ullamcorper sed vitae. Eget gravida sem elementum '
-                    'lacus a lobortis vitae. Viverra malesuada vestibulum sed vel'
-                    ' etiam non posuere in odio. Faucibus malesuada aliquam in eget'
-                    ' dolor laoreet vestibulum. Eu fermentum duis nisi ac vel '
-                    'nisl etiam tempor sociis. Vulputate nec tincidunt elit '
-                    'vitae. Id commodo proin pellentesque ac proin.',
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                    ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          
+                        ],
+                      ),
+                      Text(
+                        textAlign: TextAlign.justify,
+                        'Lorem ipsum dolor sit amet consectetur. Aliquet'
+                        ' rutrum in ullamcorper sed vitae. Eget gravida sem elementum '
+                        'lacus a lobortis vitae. Viverra malesuada vestibulum sed vel'
+                        ' etiam non posuere in odio. Faucibus malesuada aliquam in eget'
+                        ' dolor laoreet vestibulum. Eu fermentum duis nisi ac vel '
+                        'nisl etiam tempor sociis. Vulputate nec tincidunt elit '
+                        'vitae. Id commodo proin pellentesque ac proin.',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -234,7 +314,7 @@ class ServiceCard extends StatelessWidget {
       elevation: 8,
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: Column(
           children: [
             Image.asset(
@@ -246,9 +326,11 @@ class ServiceCard extends StatelessWidget {
               height: 19,
             ),
             Text(
+              softWrap: false,
+              overflow: TextOverflow.ellipsis,
               service,
               style: GoogleFonts.inter(
-                fontSize: 12,
+                fontSize: 10,
                 fontWeight: FontWeight.w500,
               ),
             )
