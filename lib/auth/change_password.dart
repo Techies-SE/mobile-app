@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/auth/verification_done.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/profile/setting.dart';
+import 'package:patient_app/services/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: profileProvider.changePassword == true ? true : false,
         backgroundColor: Colors.white,
       ),
       body: Padding(
@@ -244,12 +248,21 @@ class ChangePassword extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VerificationDone(),
-                    ),
-                  );
+                  profileProvider.changePassword == true
+                      ? Navigator.pop(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Setting(),
+                          ),
+                        )
+                      : Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerificationDone(),
+                          ),
+                        );
+
+                  profileProvider.setChangePassword(true);
                 },
                 style: TextButton.styleFrom(
                   minimumSize: Size(339, 64),
