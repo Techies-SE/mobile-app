@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../components/category_card.dart';
-import 'appointment_provider.dart';
 
 class AllCategories extends StatelessWidget {
   const AllCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppointmentProvider>(context);
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -47,14 +43,17 @@ class AllCategories extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CategoryCard(
+                department: 'tooth',
                   image: 'tooth.png',
                   color: Color(0xffDC9497),
                   categoryName: 'Dentistry'),
               CategoryCard(
+                department: 'heart',
                   image: 'heart.png',
                   color: Color(0xff93C19E),
                   categoryName: 'Cardiology'),
               CategoryCard(
+                department: 'lung',
                   image: 'lung.png',
                   color: Color(0xffF5AD7E),
                   categoryName: 'Pulmonology'),
@@ -65,14 +64,17 @@ class AllCategories extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CategoryCard(
+                department: 'stethoscope',
                   image: 'stethoscope.png',
                   color: Color(0xffACA1CD),
                   categoryName: 'General'),
               CategoryCard(
+                department: 'brain',
                   image: 'brain.png',
                   color: Color(0xff4D9B91),
                   categoryName: 'Neurology'),
               CategoryCard(
+                department: 'stomach',
                   image: 'stomach.png',
                   color: Color(0xff4B5563),
                   categoryName: 'Gastroenterology'),
@@ -83,6 +85,7 @@ class AllCategories extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CategoryCard(
+                department: 'lab',
                   image: 'lab.png',
                   color: Color(0xffDEB6B5),
                   categoryName: 'Laboratory'),
@@ -90,6 +93,7 @@ class AllCategories extends StatelessWidget {
                 width: 50,
               ),
               CategoryCard(
+                department: 'syringe',
                   image: 'syringe.png',
                   color: Color(0xff89CCDB),
                   categoryName: 'Vaccination'),

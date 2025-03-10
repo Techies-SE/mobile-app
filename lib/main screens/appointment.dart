@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:patient_app/appointment/all_categories.dart';
 import 'package:patient_app/appointment/appointment_provider.dart';
+import 'package:patient_app/appointment/doctor.dart';
 import 'package:patient_app/appointment/main_appointment.dart';
 import 'package:patient_app/constants.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +22,20 @@ class Appointment extends StatelessWidget {
           ),
           centerTitle: true,
           // automaticallyImplyLeading: provider.pageChange,
-          leading: provider.pageChange
+          leading: provider.pageChange || provider.secondPageChange
               ? IconButton(
                   onPressed: () {
                     provider.controller.previousPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                     );
-                    provider.setPageChange(false);
+                    if (provider.secondPageChange == true) {
+                      provider.setSecondPageChange(false);
+                      provider.setPageChange(true);
+                    }else{
+                       provider.setPageChange(false);
+                    }
+                   
                   },
                   icon: Icon(CupertinoIcons.back),
                 )
@@ -41,6 +48,7 @@ class Appointment extends StatelessWidget {
           children: [
             MainAppointment(),
             AllCategories(),
+            Doctor(department: provider.department),
           ],
         ));
   }
