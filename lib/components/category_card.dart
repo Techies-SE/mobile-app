@@ -27,7 +27,6 @@ class CategoryCard extends StatelessWidget {
             onTap: () {
               provider.setDepartment(department);
               provider.controller.jumpToPage(2);
-              provider.setPageChange(true);
               provider.setSecondPageChange(true);
             },
             child: Card(
