@@ -25,17 +25,26 @@ class Appointment extends StatelessWidget {
           leading: provider.pageChange || provider.secondPageChange
               ? IconButton(
                   onPressed: () {
-                    provider.controller.previousPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
                     if (provider.secondPageChange == true) {
-                      provider.setSecondPageChange(false);
-                      provider.setPageChange(true);
-                    }else{
-                       provider.setPageChange(false);
+                      if (provider.pageChange == true) {
+                        provider.controller.previousPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                        provider.setPageChange(true);
+                        provider.setSecondPageChange(false);
+                      } else {
+                        provider.controller.jumpToPage(0);
+                        provider.setSecondPageChange(false);
+                      }
+                      // provider.setPageChange(true);
+                    } else {
+                      provider.controller.previousPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                      provider.setPageChange(false);
                     }
-                   
                   },
                   icon: Icon(CupertinoIcons.back),
                 )
