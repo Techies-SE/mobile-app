@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient_app/appointment/appointment_provider.dart';
+import 'package:patient_app/services/profile_provider.dart';
 import 'package:provider/provider.dart';
-
 import 'boarding/walkthrough.dart';
 
 void main() {
@@ -16,6 +16,7 @@ class PatientApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppointmentProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

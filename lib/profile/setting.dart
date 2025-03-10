@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:patient_app/auth/change_password.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/services/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class Setting extends StatefulWidget {
   const Setting({super.key});
@@ -14,6 +17,7 @@ class _SettingState extends State<Setting> {
   bool getNoti = false;
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -74,12 +78,91 @@ class _SettingState extends State<Setting> {
                   Switch(
                     activeColor: Color(0xffE5E7EB),
                     activeTrackColor: mainBgColor,
-                    value: getNoti,
+                    inactiveThumbColor: Color(0xffE5E7EB),
+                    inactiveTrackColor: Color(0xffB9C0C9),
+                    trackOutlineWidth: WidgetStatePropertyAll(0),
+                    value: profileProvider.getNoti,
                     onChanged: (value) {
-                      setState(() {
-                        getNoti = value;
-                      });
+                      profileProvider.setGetNoti(value);
                     },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xffE5E7EB),
+                    child: Icon(
+                      Icons.language,
+                      color: mainBgColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Text('Language'),
+                  ),
+                  profileProvider.language == 0 ?
+                  Text('English'): Text('Thai'),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      _showLanguageBottomSheet(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: mainBgColor,
+                      size: 25,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Color(0xffE5E7EB),
+                    child: Icon(
+                      Icons.lock,
+                      color: mainBgColor,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Text('Change Password'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangePassword(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: mainBgColor,
+                      size: 25,
+                    ),
                   ),
                 ],
               )
@@ -87,6 +170,88 @@ class _SettingState extends State<Setting> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showLanguageBottomSheet(BuildContext context) {
+    // bool isEnglish = true;
+    // bool isThai = false;
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        final profileProvider = Provider.of<ProfileProvider>(context);
+        return StatefulBuilder(builder: (context, setModalState) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 5,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: Color(0xffB9C0C9),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  GestureDetector(
+                    onTap: () {
+                      // setModalState(() {
+                      //   isEnglish = true;
+                      //   isThai = false;
+                      // });
+                      profileProvider.setLanguage(0);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('English'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        // isEnglish == true
+                        profileProvider.language == 0
+                            ? Icon(Icons.check)
+                            : SizedBox(
+                                width: 23,
+                              )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {
+                      // setModalState(() {
+                      //   isEnglish = false;
+                      //   isThai = true;
+                      // });
+                      profileProvider.setLanguage(1);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Thai'),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        // isThai == true
+                        profileProvider.language == 1
+                            ? Icon(Icons.check)
+                            : SizedBox(
+                                width: 25,
+                              ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                ],
+              ),
+            ),
+          );
+        });
+      },
     );
   }
 }

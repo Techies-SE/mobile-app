@@ -22,7 +22,7 @@ class Help extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 50,
+              height: 10,
             ),
             Text(
               'Contact us using contact details below.',
