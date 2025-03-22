@@ -11,7 +11,7 @@ class AllCategories extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: bgColor,
+        backgroundColor: Colors.white,
         title: Text(
           'Appointment',
           style: appbarTestStyle,

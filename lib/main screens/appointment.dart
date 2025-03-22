@@ -21,7 +21,7 @@ class _AppointmentState extends State<Appointment> {
       child: Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          backgroundColor: bgColor,
+          backgroundColor: Colors.white,
           title: Text(
             'Appointment',
             style: appbarTestStyle,

@@ -88,6 +88,16 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   GestureDetector(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainScreen(
+                                myIndex: 2,
+                              ),
+                            ),
+                            (route) => false);
+                    },
                     child: Text(
                       'Viewall',
                       style: GoogleFonts.poppins(
