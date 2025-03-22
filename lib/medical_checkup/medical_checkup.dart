@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/constants.dart';
-import 'package:patient_app/medical_checkup/medical_card.dart';
+import 'package:patient_app/medical_checkup/medical_checkup_detail.dart';
 
 class MedicalCheckup extends StatelessWidget {
   const MedicalCheckup({super.key});
@@ -27,66 +27,78 @@ class MedicalCheckup extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.green,
-                    radius: 4,
-                  ),
-                  SizedBox(
-                    width: 3,
-                  ),
-                  Text(
-                    'Last Updated: Jan 15, 2025',
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      color: textColorSecondary,
+              SizedBox(
+                width: 260,
+                height: 40,
+                child: TextField(
+                  decoration: InputDecoration(
+                    enabled: true,
+                    filled: true,
+                    fillColor: Color(0xffE9E7E2),
+                    contentPadding: EdgeInsets.zero,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 20,
+                    ),
+                    hintText: 'Search',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                ],
+                ),
               ),
               SizedBox(
-                height: 30,
+                height: 15,
               ),
-              MedicalCard(
-                title: 'Blood Pressure',
-                measure: '120/80 mmHg',
-                status: 'Normal',
-                statusCardColor: Color(0xff63B08B),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              MedicalCard(
-                title: 'Glucose Levels',
-                measure: '126 mg/dL',
-                status: 'At Risk',
-                statusCardColor: Color(0xffD1BA30),
-              ),
-              MedicalCard(
-                title: 'Lipid Profile',
-                measure: '240mg/dL',
-                status: 'Critical',
-                statusCardColor: Color(0xffCD3737),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '2025',
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    color: textColorSecondary,
+                  ),
+                ),
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
-              MedicalCard(
-                title: 'Kidney & Liver Function',
-                measure: 'All parameters normal',
-                status: 'Normal',
-                statusCardColor: Color(0xff63B08B),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              MedicalCard(
-                title: 'CBC',
-                measure: 'Within range',
-                status: 'Normal',
-                statusCardColor: Color(0xff63B08B),
-              ),
+              ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                tileColor: Colors.white,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Blood Pressure',
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      'March 15,2025',
+                      style: GoogleFonts.poppins(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+                trailing: Icon(Icons.chevron_right_outlined),
+                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MedicalCheckupDetail(title: 'Blood Pressure'),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
