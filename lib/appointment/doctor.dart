@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patient_app/appointment/doctor_card.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/services/noti_service.dart';
 
 class Doctor extends StatefulWidget {
   const Doctor({super.key, required this.department});
@@ -26,7 +27,20 @@ class _DoctorState extends State<Doctor> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: TextButton(
-              onPressed: isSelected == null ? null : () {},
+              onPressed: isSelected == null
+                  ? null
+                  : () {
+                      //print('book');
+                      // NotiService().showNoti(
+                      //     title: "Booking Successful!",
+                      //     body: 'You Have Booked an Appointment Successfully!');
+                      NotiService().scheduleNoti(
+                        title: "Booking Reminder!",
+                        body: 'You have an Appointment today!',
+                        hour: 16,
+                        min: 30,
+                      );
+                    },
               style: TextButton.styleFrom(
                   backgroundColor:
                       isSelected == null ? Colors.grey : mainBgColor,
