@@ -29,7 +29,7 @@ class Boarding1 extends StatelessWidget {
                 'Check Medical History',
                 style: GoogleFonts.inter(
                   color: mainBgColor,
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

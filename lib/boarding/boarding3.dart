@@ -29,7 +29,7 @@ class Boarding3 extends StatelessWidget {
                 'Get Recommendation',
                 style: GoogleFonts.inter(
                   color: mainBgColor,
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

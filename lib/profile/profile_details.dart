@@ -3,7 +3,11 @@ import 'package:flutter/cupertino.dart';
 import '../constants.dart';
 
 class ProfileDetails extends StatelessWidget {
-  const ProfileDetails({super.key});
+  final String hnNum;
+  final String fullName;
+  final String phoneNumber;
+  final String citizenId;
+  const ProfileDetails({super.key, required this.hnNum,required this.fullName, required this.phoneNumber, required this.citizenId});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,7 @@ class ProfileDetails extends StatelessWidget {
 
               // Name card
               Text(
-                "John Doe",
+                fullName,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -120,14 +124,14 @@ class ProfileDetails extends StatelessWidget {
                       _buildInfoItem(
                         CupertinoIcons.phone_fill, 
                         "Phone Number", 
-                        "06123456",
+                        phoneNumber,
                       ),
                       Divider(height: 24),
                       
                       _buildInfoItem(
                         CupertinoIcons.creditcard_fill, 
                         "Citizen ID", 
-                        "Hi12345",
+                        citizenId,
                       ),
                       Divider(height: 24),
                       
@@ -140,8 +144,8 @@ class ProfileDetails extends StatelessWidget {
                       
                       _buildInfoItem(
                         CupertinoIcons.mail_solid, 
-                        "Email", 
-                        "johndoe@example.com",
+                        "HN Number", 
+                        hnNum,
                       ),
                       Divider(height: 24),
                       

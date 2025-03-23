@@ -3,15 +3,19 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/auth/change_password.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/main_screen.dart';
 
-class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+class OtpScreen extends StatelessWidget {
+  final bool? firstTimeLogin;
+  const OtpScreen({super.key, required this.firstTimeLogin});
+  void nextScreen(BuildContext context){
+    if(firstTimeLogin!){
+       Navigator.push(context, MaterialPageRoute(builder: (context)=> ChangePassword()));
+    }else{
+       Navigator.push(context, MaterialPageRoute(builder: (context)=>MainScreen()));
+    }
+  }
 
-  @override
-  State<OtpScreen> createState() => _OtpScreenState();
-}
-
-class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,12 +77,7 @@ class _OtpScreenState extends State<OtpScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangePassword(),
-                  ),
-                );
+               nextScreen(context);
               },
               style: TextButton.styleFrom(
                 minimumSize: Size(339, 64),

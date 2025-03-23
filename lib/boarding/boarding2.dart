@@ -29,7 +29,7 @@ class Boarding2 extends StatelessWidget {
                 'Schedule Appointment',
                 style: GoogleFonts.inter(
                   color: mainBgColor,
-                  fontSize: 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
