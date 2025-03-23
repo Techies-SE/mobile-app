@@ -31,9 +31,15 @@ class _DoctorState extends State<Doctor> {
                   ? null
                   : () {
                       //print('book');
-                      NotiService().showNoti(
-                          title: "Booking Successful!",
-                          body: 'You Have Booked an Appointment Successfully!');
+                      // NotiService().showNoti(
+                      //     title: "Booking Successful!",
+                      //     body: 'You Have Booked an Appointment Successfully!');
+                      NotiService().scheduleNoti(
+                        title: "Booking Reminder!",
+                        body: 'You have an Appointment today!',
+                        hour: 16,
+                        min: 30,
+                      );
                     },
               style: TextButton.styleFrom(
                   backgroundColor:
