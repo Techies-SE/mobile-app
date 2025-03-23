@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:patient_app/appointment/appointment_provider.dart';
-import 'package:provider/provider.dart';
+//import 'package:patient_app/appointment/appointment_provider.dart';
+import 'package:patient_app/appointment/doctor.dart';
+//import 'package:provider/provider.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -18,16 +19,21 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<AppointmentProvider>(context);
+    //var provider = Provider.of<AppointmentProvider>(context);
     return SizedBox(
       width: 80,
+      //height: 100,
       child: Column(
         children: [
           GestureDetector(
             onTap: () {
-              provider.setDepartment(department);
-              provider.controller.jumpToPage(2);
-              provider.setSecondPageChange(true);
+              //provider.setDepartment(department);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Doctor(department: department),
+                ),
+              );
             },
             child: Card(
               elevation: 5,
