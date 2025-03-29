@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/appointment/all_categories.dart';
@@ -33,142 +34,168 @@ class _AppointmentState extends State<Appointment> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text(
-                  'Categories',
-                  style: GoogleFonts.inter(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
+              // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              //   Text(
+              //     'Categories',
+              //     style: GoogleFonts.inter(
+              //       fontSize: 13,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              //   GestureDetector(
+              //     onTap: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => AllCategories(),
+              //         ),
+              //       );
+              //     },
+              //     child: Text(
+              //       'Viewall',
+              //       style: GoogleFonts.inter(
+              //         decoration: TextDecoration.underline,
+              //         decorationColor: mainBgColor,
+              //         fontWeight: FontWeight.w400,
+              //         fontSize: 14,
+              //         color: mainBgColor,
+              //       ),
+              //     ),
+              //   )
+              // ],
+              // ),
+              // SizedBox(
+              //   height: 30,
+              // ),
+
+              // Flexible(
+              //   child: GridView.count(
+              //     padding: EdgeInsets.zero,
+              //     shrinkWrap: true,
+              //     physics: BouncingScrollPhysics(),
+              //     childAspectRatio: 0.8,
+              //     crossAxisCount:4,
+              //     children: [
+              //       CategoryCard(
+              //         department: 'Dentistry',
+              //           image: 'tooth.png',
+              //           color: Color(0xffDC9497),
+              //           categoryName: 'Dentistry'),
+              //       CategoryCard(
+              //         department: 'Cardiology',
+              //           image: 'heart.png',
+              //           color: Color(0xff93C19E),
+              //           categoryName: 'Cardiology'),
+              //       CategoryCard(
+              //         department: 'Pulmonology',
+              //           image: 'lung.png',
+              //           color: Color(0xffF5AD7E),
+              //           categoryName: 'Pulmonology'),
+              //           CategoryCard(
+              //         department: 'General',
+              //           image: 'stethoscope.png',
+              //           color: Color(0xffACA1CD),
+              //           categoryName: 'General'),
+              //       CategoryCard(
+              //         department: 'Neurology',
+              //           image: 'brain.png',
+              //           color: Color(0xff4D9B91),
+              //           categoryName: 'Neurology'),
+              //       CategoryCard(
+              //         department: 'Gastroenterology',
+              //           image: 'stomach.png',
+              //           color: Color(0xff4B5563),
+              //           categoryName: 'Gastroenterology'),
+              //           CategoryCard(
+              //       department: 'Laboratory',
+              //         image: 'lab.png',
+              //         color: Color(0xffDEB6B5),
+              //         categoryName: 'Laboratory'),
+              //     CategoryCard(
+              //       department: 'Vaccination',
+              //         image: 'syringe.png',
+              //         color: Color(0xff89CCDB),
+              //         categoryName: 'Vaccination'),
+              //     ],
+              //    ),
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AllCategories(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      CupertinoIcons.plus,
+                      color: Colors.white,
+                    ),
+                    label: Text(
+                      'Book New Appointment',
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: TextButton.styleFrom(
+                        backgroundColor: mainBgColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        )),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AllCategories(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Viewall',
-                    style: GoogleFonts.inter(
-                      decoration: TextDecoration.underline,
-                      decorationColor: mainBgColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                      color: mainBgColor,
+              ),
+              Text(
+                'My Bookings',
+                style: GoogleFonts.inter(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              TabBar(
+                //indicatorSize: TabBarIndicatorSize.tab,
+                tabAlignment: TabAlignment.fill,
+                indicatorColor: mainBgColor,
+                labelColor: Colors.black,
+                labelStyle: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelColor: textColorSecondary,
+                tabs: [
+                  Tab(
+                    child: Text(
+                      'Upcoming',
+                      textAlign: TextAlign.start,
                     ),
                   ),
-                )
-              ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              //use when api integration
-              // GridView.builder(
-              // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5), 
-              // itemBuilder: (context,index){
-      
-              // },)
-      
-              Flexible(
-                child: GridView.count(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  childAspectRatio: 0.8,
-                  crossAxisCount:4,
-                  children: [
-                    CategoryCard(
-                      department: 'Dentistry',
-                        image: 'tooth.png',
-                        color: Color(0xffDC9497),
-                        categoryName: 'Dentistry'),
-                    CategoryCard(
-                      department: 'Cardiology',
-                        image: 'heart.png',
-                        color: Color(0xff93C19E),
-                        categoryName: 'Cardiology'),
-                    CategoryCard(
-                      department: 'Pulmonology',
-                        image: 'lung.png',
-                        color: Color(0xffF5AD7E),
-                        categoryName: 'Pulmonology'),
-                        CategoryCard(
-                      department: 'General',
-                        image: 'stethoscope.png',
-                        color: Color(0xffACA1CD),
-                        categoryName: 'General'),
-                    CategoryCard(
-                      department: 'Neurology',
-                        image: 'brain.png',
-                        color: Color(0xff4D9B91),
-                        categoryName: 'Neurology'),
-                    CategoryCard(
-                      department: 'Gastroenterology',
-                        image: 'stomach.png',
-                        color: Color(0xff4B5563),
-                        categoryName: 'Gastroenterology'),
-                        CategoryCard(
-                    department: 'Laboratory',
-                      image: 'lab.png',
-                      color: Color(0xffDEB6B5),
-                      categoryName: 'Laboratory'),
-                  CategoryCard(
-                    department: 'Vaccination',
-                      image: 'syringe.png',
-                      color: Color(0xff89CCDB),
-                      categoryName: 'Vaccination'),
-                  ],
-                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            Text(
-              'My Bookings',
-              style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          
-            TabBar(
-              //indicatorSize: TabBarIndicatorSize.tab,
-              tabAlignment: TabAlignment.fill,
-              indicatorColor: mainBgColor,
-              labelColor: Colors.black,
-              labelStyle: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-              unselectedLabelColor: textColorSecondary,
-              tabs: [
-                Tab(
-                  child: Text(
-                    'Upcoming',
-                    textAlign: TextAlign.start,
+                  Tab(
+                    text: 'Completed',
                   ),
-                ),
-                Tab(
-                  text: 'Completed',
-                ),
-                Tab(
-                  text: 'Cancelled',
-                ),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  Upcoming(),
-                  Upcoming(),
-                  Upcoming(),
+                  Tab(
+                    text: 'Cancelled',
+                  ),
                 ],
               ),
-            )
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    Upcoming(),
+                    Upcoming(),
+                    Upcoming(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
