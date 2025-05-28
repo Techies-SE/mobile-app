@@ -1,17 +1,70 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/services/api_service.dart';
+import 'package:patient_app/services/general_service.dart';
+import 'package:provider/provider.dart';
 
 class MedicalCheckupDetail extends StatefulWidget {
-  const MedicalCheckupDetail({super.key, required this.title});
+  const MedicalCheckupDetail({
+    super.key,
+    required this.title,
+    required this.time, required this.lab_test_id,
+  });
 
   final String title;
+  final String time;
+  final int lab_test_id;
+
+
 
   @override
   State<MedicalCheckupDetail> createState() => _MedicalCheckupDetailState();
 }
 
 class _MedicalCheckupDetailState extends State<MedicalCheckupDetail> {
+
+  bool? isLoading;
+  List<dynamic> labItems = [];
+  
+  Future<void> _fetchLabResults() async {
+    //final generalService = Provider.of<GeneralService>(context, listen: false);
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      final response = await ApiService.get(
+          '/patients/lab-test-items/${widget.lab_test_id}');
+      //print('it is above the if');
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        // print('it is in the if');
+        final data = json.decode(response.body);
+        setState(() {
+          labItems = data['data'];
+          
+          print('Lab Test: $labItems');
+        });
+      } else {
+        print(response.statusCode);
+      }
+    } catch (e) {
+      print('Error $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchLabResults();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +76,13 @@ class _MedicalCheckupDetailState extends State<MedicalCheckupDetail> {
           style: appbarTestStyle,
         ),
       ),
-      body: Padding(
+      body: isLoading == true?
+      Center(
+              child: CircularProgressIndicator(),
+            ):
+      Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 30,
+          horizontal: 20,
         ),
         child: Center(
           child: Column(
@@ -33,67 +90,99 @@ class _MedicalCheckupDetailState extends State<MedicalCheckupDetail> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Today, 9:30 AM',
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  widget.time,
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
                   ),
-                  Card(
-                    color: Color(0xffD1BA30),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text('High'),
-                    ),
-                  )
-                ],
+                ),
               ),
               SizedBox(
                 height: 15,
               ),
               Flexible(
-                child: GridView.builder(
-                  itemCount: 2,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.4,
-                    crossAxisSpacing: 10,
-                  ),
+                child: ListView.separated(
+                  separatorBuilder:(context, index) => SizedBox(height: 10,),
+                  itemCount: labItems.length,
                   itemBuilder: (context, index) {
+                    final labItemDetail = labItems[index];
                     return Card(
-                      color: Color(0xffE6F6F4),
+                      //color: Color(0xffE6F6F4),
+                      color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                            vertical: 10.0, horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Systolic',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff595959)),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                 labItemDetail['lab_item_name'],
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                                ),
+                                SizedBox(height: 5,),
+                                Text(
+                                  'Your Value',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff595959),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text(
+                                  'Normal Range',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff595959),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              '140',
-                              style: GoogleFonts.inter(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              'mmhg',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    textAlign: TextAlign.right,
+                                    overflow: TextOverflow.ellipsis,
+                                   labItemDetail['lab_item_status']??'-',
+                                    style: GoogleFonts.poppins(
+                                    
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: mainBgColor),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text(
+                                  '${labItemDetail['lab_item_value'] ?? '-'} ${labItemDetail['unit']??'-'}',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff595959),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text(
+                                  labItemDetail['normal_range'] ?? '-',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0xff595959),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

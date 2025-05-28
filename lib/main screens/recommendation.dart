@@ -1,9 +1,49 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:patient_app/services/api_service.dart';
 import 'package:patient_app/constants.dart';
+import 'package:patient_app/services/general_service.dart';
+import 'package:provider/provider.dart';
 
-class Recommendation extends StatelessWidget {
-  const Recommendation({super.key});
+class Recommendation extends StatefulWidget {
+  const Recommendation({super.key, required this.lab_test_id});
+  final int lab_test_id;
+
+  @override
+  State<Recommendation> createState() => _RecommendationState();
+}
+
+class _RecommendationState extends State<Recommendation> {
+  List<dynamic> recom = [];
+  bool isLoading = false;
+
+  Future<void> _fetchRecom() async {
+    try {
+      setState(() => isLoading = true);
+      final response = await ApiService.get('/patients/lab-test/${widget.lab_test_id}/recommendations');
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final data = json.decode(response.body);
+        setState(() {
+          recom = data['data'];
+        });
+      } else {
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Exception: $e');
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchRecom();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,251 +51,127 @@ class Recommendation extends StatelessWidget {
       backgroundColor: bgColor,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           'Recommendation',
           style: appbarTestStyle,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 10,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Card(
-                color: cardColor,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            'assets/images/robot.png',
-                            width: 22,
-                            height: 22,
-                          ),
-                          Text(
-                            'Jan 28,2025',
-                            style: GoogleFonts.poppins(
-                              fontSize: 10,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: VerticalDivider(
-                              color: mainBgColor,
-                              thickness: 3,
-                              indent: 10,
-                            ),
-                          ),
-                          Column(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : recom.isEmpty
+              ? Center(
+                  child: Text(
+                    'No recommendations found.',
+                    style: GoogleFonts.poppins(fontSize: 16),
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: ListView.separated(
+                    itemCount: recom.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 20),
+                    itemBuilder: (context, index) {
+                      final item = recom[index];
+                      final labTestDate = DateFormat('MMMM d, yyyy').format(DateTime.parse(item['lab_test_date']));
+                      final doctorName = item['doctor_name'] ?? 'N/A';
+                      final specialization = item['specialization'] ?? 'General';
+                      final testName = item['test_name'] ?? 'Test';
+                      final recommendationText = item['generated_recommendation'] ?? '';
+
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 8,
+                              offset: Offset(0, 4),
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              /// Header row
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset('assets/images/robot.png', width: 24, height: 24),
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        testName,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    labTestDate,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: Colors.grey[600],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+
+                              /// Doctor info
+                              Row(
+                                children: [
+                                  Icon(Icons.person_outline, size: 18, color: mainBgColor),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    '$doctorName • $specialization',
+                                    style: GoogleFonts.poppins(fontSize: 13, color: Colors.grey[700]),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 20),
+
+                              /// Recommendation title
                               Text(
-                                'Diagnosis',
+                                'Recommendations',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 13,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: mainBgColor,
                                 ),
                               ),
-                              Text(
-                                'Type 2 Diabetes with mild hypertension',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: textColorSecondary,
+                              const SizedBox(height: 12),
+
+                              /// Recommendation content
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF6F6F6),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: SelectableText(
+                                  recommendationText.replaceAll(r'\n', '\n'),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    color: textColorSecondary,
+                                    height: 1.5,
+                                  ),
                                 ),
                               ),
                             ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Treatment Plan',
-                        style: GoogleFonts.poppins(
-                          fontSize: 13,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Metformin 500 mg twice daily',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: textColorSecondary,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Daily blood pressure monitoring',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: textColorSecondary,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Low-sodium diet recommended',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: textColorSecondary,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Lifestyle Recommendations',
-                        style: GoogleFonts.poppins(
-                          fontSize: 13,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            '30 minutes daily moderate exercise',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: textColorSecondary,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.check_circle_outline,
-                            size: 12,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Regular blood sugar monitoring',
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: textColorSecondary,
-                            ),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Lorem ipsum dolor sit amet consectetur. Aliquet rutrum'
-                        ' in ullamcorper sed vitae. Eget gravida sem elementum lacus'
-                        ' a lobortis vitae. Viverra malesuada vestibulum sed vel'
-                        ' etiam non posuere in odio. Faucibus malesuada aliquam in'
-                        ' eget dolor laoreet vestibulum. Eu fermentum duis nisi ac'
-                        ' vel nisl etiam tempor sociis. Vulputate nec tincidunt '
-                        'elit vitae. Id commodo proin pellentesque ac proin.',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          color: textColorSecondary,
-                        ),
-                        textAlign: TextAlign.justify,
-                      )
-                    ],
+                      );
+                    },
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton.icon(
-                onPressed: () {},
-                label: Text(
-                  'Download',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                icon: Icon(
-                  Icons.file_download_outlined,
-                  color: Colors.white,
-                  size: 22,
-                ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 64),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  backgroundColor: mainBgColor,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

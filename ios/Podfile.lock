@@ -37,16 +37,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-<<<<<<< HEAD
+  flutter_local_notifications: ff50f8405aaa0ccdc7dcfb9022ca192e8ad9688f
   flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
+  flutter_timezone: ac3da59ac941ff1c98a2e1f0293420e020120282
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-=======
-  flutter_local_notifications: a5a732f069baa862e728d839dd2ebb904737effb
-  flutter_native_splash: 6cad9122ea0fad137d23137dd14b937f3e90b145
-  flutter_timezone: 7c838e17ffd4645d261e87037e5bebf6d38fe544
-  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
->>>>>>> 1c4cb93380ad8031e0fedb9dd61a4adca165e174
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:patient_app/profile/profile_setup.dart';
 import '../constants.dart';
 
 class ProfileDetails extends StatelessWidget {
@@ -84,9 +85,9 @@ class ProfileDetails extends StatelessWidget {
               
               SizedBox(height: 6),
               Text(
-                "Patient",
+                "HN Number: #$hnNum",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 13,
                   color: Colors.grey,
                 ),
               ),
@@ -142,12 +143,12 @@ class ProfileDetails extends StatelessWidget {
                       ),
                       Divider(height: 24),
                       
-                      _buildInfoItem(
-                        CupertinoIcons.mail_solid, 
-                        "HN Number", 
-                        hnNum,
-                      ),
-                      Divider(height: 24),
+                      // _buildInfoItem(
+                      //   CupertinoIcons.mail_solid, 
+                      //   "HN Number", 
+                      //   hnNum,
+                      // ),
+                      // Divider(height: 24),
                       
                       _buildInfoItem(
                         CupertinoIcons.location_solid, 
@@ -178,6 +179,34 @@ class ProfileDetails extends StatelessWidget {
                   // icon: Icon(Icons.edit),
                   label: Text(
                     'Update Profile',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              
+              // Update button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PatientProfileSetup()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: mainBgColor,
+                    foregroundColor: Colors.white,
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 2,
+                  ),
+                  // icon: Icon(Icons.edit),
+                  label: Text(
+                    'Setup Profile',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

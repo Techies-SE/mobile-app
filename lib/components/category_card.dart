@@ -1,8 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:patient_app/appointment/appointment_provider.dart';
 //import 'package:patient_app/appointment/appointment_provider.dart';
 import 'package:patient_app/appointment/doctor.dart';
+import 'package:patient_app/services/api_service.dart';
 //import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -11,27 +17,29 @@ class CategoryCard extends StatelessWidget {
     required this.color,
     required this.categoryName,
     required this.department,
+    required this.departmentId
   });
   final String image;
   final Color color;
   final String categoryName;
   final String department;
+  final int departmentId;
 
   @override
   Widget build(BuildContext context) {
-    //var provider = Provider.of<AppointmentProvider>(context);
+    var provider = Provider.of<AppointmentProvider>(context);
     return SizedBox(
       width: 80,
       //height: 100,
       child: Column(
         children: [
           GestureDetector(
-            onTap: () {
-              //provider.setDepartment(department);
+            onTap: () async{
+              provider.setDepartment(department);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Doctor(department: department),
+                  builder: (context) => Doctor(department: department, departmentId: departmentId,),
                 ),
               );
             },

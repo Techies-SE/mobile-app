@@ -7,6 +7,8 @@ import 'package:patient_app/profile/help.dart';
 import 'package:patient_app/profile/privacy_policy.dart';
 import 'package:patient_app/profile/profile_details.dart';
 import 'package:patient_app/profile/setting.dart';
+import 'package:patient_app/services/general_service.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,52 +29,66 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     super.initState();
-    fetchProfile();
-  }
-
-  Future<void> fetchProfile() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-
-    if (token == null) {
-      print("No token found! Redirecting to login...");
-      return;
-    }
-
-    final url = 'http://localhost:3000/profile';
-    try {
-      final response = await http.get(
-        Uri.parse(url),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body)['user'];
-        
+    //fetchProfile();
+    WidgetsBinding.instance.addPersistentFrameCallback((_){
+        final generalService = Provider.of<GeneralService>(context, listen : false);
+        generalService.fetchProfile();
         setState(() {
-          hnNum = data['hn_number'];
-          name = data['name'];
-          citizenId = data['citizen_id'];
-          phoneNum = data['phone_no'];
-          isLoading = false;
+          hnNum = generalService.hnNumber;
+          name = generalService.name;
+          citizenId = generalService.citizenId;
+          phoneNum = generalService.phoneNum;
         });
-
-        print("Profile data loaded successfully: $data");
-      } else {
-        print("Failed to load profile: ${response.statusCode}");
-        setState(() => isLoading = false);
-      }
-    } catch (e) {
-      print("Error fetching profile: $e");
-      setState(() => isLoading = false);
-    }
+    });
   }
+
+  // Future<void> fetchProfile() async {
+  //   final generalService = Provider.of<GeneralService>(context,listen: false);
+  //   final prefs = await SharedPreferences.getInstance();
+  //   String? token = prefs.getString('token');
+
+  //   if (token == null) {
+  //     print("No token found! Redirecting to login...");
+  //     return;
+  //   }
+
+  //   final url = 'http://localhost:3000/profile';
+  //   try {
+  //     final response = await http.get(
+  //       Uri.parse(url),
+  //       headers: {
+  //         'Authorization': 'Bearer $token',
+  //         'Content-Type': 'application/json',
+  //       },
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final data = jsonDecode(response.body)['user'];
+        
+  //       setState(() {
+  //         hnNum = data['hn_number'];
+  //         name = data['name'];
+  //         citizenId = data['citizen_id'];
+  //         phoneNum = data['phone_no'];
+  //         isLoading = false;
+  //         generalService.setHnNumber(data['hn_number']);
+  //         print('hn num : ${generalService.hnNumber}');
+  //       });
+
+  //       print("Profile data loaded successfully: $data");
+  //     } else {
+  //       print("Failed to load profile: ${response.statusCode}");
+  //       setState(() => isLoading = false);
+  //     }
+  //   } catch (e) {
+  //     print("Error fetching profile: $e");
+  //     setState(() => isLoading = false);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final generalService = Provider.of<GeneralService>(context);
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -80,7 +96,7 @@ class _ProfileState extends State<Profile> {
         automaticallyImplyLeading: false,
         centerTitle: true,
       ),
-      body: isLoading
+      body: generalService.isLoading
           ? Center(child: CircularProgressIndicator()) // Show loading spinner
           : Padding(
               padding: const EdgeInsets.only(left: 15.0),

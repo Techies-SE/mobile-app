@@ -4,6 +4,7 @@ import 'package:patient_app/main%20screens/appointment.dart';
 import 'package:patient_app/main%20screens/homepage.dart';
 import 'package:patient_app/main%20screens/profile.dart';
 import 'package:patient_app/main%20screens/recommendation.dart';
+import 'package:patient_app/recommendation/lab_tests.dart';
 
 
 // ignore: must_be_immutable
@@ -21,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages = [
       Homepage(),
-      Recommendation(),
+      RecommendationLabTests(),
       Appointment(),
       Profile(),
     ];

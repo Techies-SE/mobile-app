@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
  Future <void> login()async{
-   final String apiLink = "http://localhost:3000/login";
+   final String apiLink = "http://localhost:3000/login/patients";
 
 
    final response = await http.post(

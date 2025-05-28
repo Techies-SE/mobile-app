@@ -3,11 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:patient_app/constants.dart';
 
 class BookingCard extends StatelessWidget {
-  const BookingCard({super.key, required this.image, required this.name, required this.position});
+  const BookingCard({super.key, required this.image, required this.name, required this.position, required this.time});
 
   final String image;
   final String name;
   final String position;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class BookingCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Jube 14, 2024 - 15.00pm',
+              time,
               style: GoogleFonts.inter(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
